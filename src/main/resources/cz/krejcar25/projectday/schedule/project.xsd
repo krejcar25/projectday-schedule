@@ -1,0 +1,100 @@
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="pair">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute type="xs:string" name="stand" use="required"/>
+                    <xs:attribute type="xs:byte" name="value" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="requests">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="pair" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="assignments">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="pair" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="person">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="requests"/>
+                <xs:element ref="assignments"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="name" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="people">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="person" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="group">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="people"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="name" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="color">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute type="xs:short" name="red" use="required"/>
+                    <xs:attribute type="xs:short" name="green" use="required"/>
+                    <xs:attribute type="xs:short" name="blue" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="stand">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="color"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="name" use="required"/>
+            <xs:attribute type="xs:int" name="limit" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="stands">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="stand" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="groups">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="group" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="StandListModel">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="stands"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="project">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="groups"/>
+                <xs:element ref="StandListModel"/>
+            </xs:sequence>
+            <xs:attribute type="xs:byte" name="blockCount"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
