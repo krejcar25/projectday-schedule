@@ -15,5 +15,5 @@ The number of blocks specifies how many stands any person can attend. The number
 
 ## Checklist
 - [x] Basic functionality
-- [ ] Automatic assignments generation
-- [ ] Blocks per stand
+- [ ] Automatic assignments generation
+- [ ] Blocks per stand
