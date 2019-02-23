@@ -387,17 +387,53 @@
                   </component>
                 </children>
               </grid>
-              <scrollpane id="42b13">
+              <splitpane id="96625">
                 <constraints border-constraint="Center"/>
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="8d112" class="javax.swing.JTable" binding="assignmentsTable">
-                    <constraints/>
+                  <scrollpane id="41806">
+                    <constraints>
+                      <splitpane position="left"/>
+                    </constraints>
                     <properties/>
-                  </component>
+                    <border type="none"/>
+                    <children>
+                      <component id="da42e" class="javax.swing.JTable" binding="assignmentsTable">
+                        <constraints/>
+                        <properties/>
+                      </component>
+                    </children>
+                  </scrollpane>
+                  <grid id="f0a70" layout-manager="BorderLayout" hgap="0" vgap="0">
+                    <constraints>
+                      <splitpane position="right"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="16306" class="javax.swing.JLabel" binding="assignmentsPersonNameLabel">
+                        <constraints border-constraint="North"/>
+                        <properties>
+                          <font style="1"/>
+                          <text value=""/>
+                        </properties>
+                      </component>
+                      <scrollpane id="c7385">
+                        <constraints border-constraint="Center"/>
+                        <properties/>
+                        <border type="none"/>
+                        <children>
+                          <component id="d95fa" class="javax.swing.JList" binding="assignmentsPersonRequestsList">
+                            <constraints/>
+                            <properties/>
+                          </component>
+                        </children>
+                      </scrollpane>
+                    </children>
+                  </grid>
                 </children>
-              </scrollpane>
+              </splitpane>
             </children>
           </grid>
           <grid id="29546" layout-manager="BorderLayout" hgap="0" vgap="0">

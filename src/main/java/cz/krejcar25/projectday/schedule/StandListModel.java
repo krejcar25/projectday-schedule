@@ -1,5 +1,6 @@
 package cz.krejcar25.projectday.schedule;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -10,6 +11,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Vector;
 
 @XmlRootElement(name = "StandListModel")
@@ -45,6 +47,18 @@ public class StandListModel implements ListModel<Stand>, Serializable {
         }
     }
 
+    @Override
+    public StandListModel clone() {
+        try {
+            super.clone();
+        } catch (CloneNotSupportedException e) {
+            // won't happen
+        }
+        StandListModel clone = new StandListModel();
+        for (Stand stand : this.stands) clone.stands.add(stand.clone());
+        return clone;
+    }
+
     @Nullable
     public Stand getStandByName(String name) {
         for (Stand stand : stands) if (stand.getName().equals(name)) return stand;
@@ -78,5 +92,9 @@ public class StandListModel implements ListModel<Stand>, Serializable {
                 l.contentsChanged(new ListDataEvent(this, ListDataEvent.CONTENTS_CHANGED, i, i));
             }
         }
+    }
+
+    void sort(@NotNull Person person) {
+        stands.sort(Comparator.comparingInt(o -> person.getRequestForStand(o.getName())));
     }
 }

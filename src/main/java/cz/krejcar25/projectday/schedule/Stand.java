@@ -7,7 +7,7 @@ import java.awt.*;
 import java.io.Serializable;
 
 @XmlRootElement(name = "stand")
-public class Stand implements Serializable {
+public class Stand implements Serializable, Cloneable {
     static final Stand EMPTY = new Stand("-", Color.WHITE, -1);
     private String name;
     private Color color;
@@ -51,13 +51,27 @@ public class Stand implements Serializable {
     }
 
     @XmlTransient
-    public void setModel(StandListModel model) {
+    void setModel(StandListModel model) {
         this.model = model;
     }
 
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public Stand clone() {
+        try {
+            super.clone();
+        } catch (CloneNotSupportedException e) {
+            // won't happen
+        }
+        Stand clone = new Stand();
+        clone.name = String.valueOf(this.name);
+        clone.color = new Color(this.color.getRed(), this.color.getGreen(), this.color.getBlue());
+        clone.limit = this.limit;
+        return clone;
     }
 
     int getLimit() {

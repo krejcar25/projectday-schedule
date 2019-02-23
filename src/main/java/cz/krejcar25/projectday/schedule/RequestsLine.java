@@ -1,6 +1,7 @@
 package cz.krejcar25.projectday.schedule;
 
 import org.intellij.lang.annotations.MagicConstant;
+import org.jetbrains.annotations.NotNull;
 
 public class RequestsLine {
     static final int REQUEST_LINE = 0;
@@ -10,7 +11,7 @@ public class RequestsLine {
     private final Stand[] requests;
     private final int mode;
 
-    RequestsLine(Person person, @MagicConstant(intValues = {REQUEST_LINE, ASSIGNMENT_LINE}) int mode) {
+    RequestsLine(@NotNull Person person, @MagicConstant(intValues = {REQUEST_LINE, ASSIGNMENT_LINE}) int mode) {
         this.person = person;
         this.project = person.getGroup().project;
         this.mode = mode;
@@ -35,7 +36,7 @@ public class RequestsLine {
         }
     }
 
-    public Object getValue(int index) {
+    Object getValue(int index) {
         if (index == 0) return person.getName();
         else if (index > 0 && index <= requests.length) return requests[index - 1];
         else return null;
