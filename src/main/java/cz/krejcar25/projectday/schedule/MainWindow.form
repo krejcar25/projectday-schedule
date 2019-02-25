@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="cz.krejcar25.projectday.schedule.MainWindow">
   <grid id="27dc6" binding="root" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="536" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -382,7 +382,21 @@
                   <component id="6373f" class="javax.swing.JButton" binding="assignmentsExportButton">
                     <constraints/>
                     <properties>
-                      <text resource-bundle="strings" key="assignments.export"/>
+                      <text resource-bundle="strings" key="assignments.export.assignments"/>
+                    </properties>
+                  </component>
+                  <component id="e04b4" class="javax.swing.JButton" binding="listsExportButton">
+                    <constraints/>
+                    <properties>
+                      <text resource-bundle="strings" key="assignments.export.singleList"/>
+                      <toolTipText resource-bundle="strings" key="assignments.export.singleList.tooltip"/>
+                    </properties>
+                  </component>
+                  <component id="61ab6" class="javax.swing.JButton" binding="presenceExportButton">
+                    <constraints/>
+                    <properties>
+                      <text resource-bundle="strings" key="assignments.export.presenceLists"/>
+                      <toolTipText resource-bundle="strings" key="assignments.export.presenceLists.tooltip"/>
                     </properties>
                   </component>
                 </children>

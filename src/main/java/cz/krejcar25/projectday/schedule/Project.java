@@ -116,7 +116,7 @@ public class Project {
         return c;
     }
 
-    Vector<Person> getAllPeople() {
+    public Vector<Person> getAllPeople() {
         Vector<Person> all = new Vector<>();
         for (Group group : groups) all.addAll(group.getPeople());
         return all;

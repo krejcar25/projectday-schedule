@@ -4,58 +4,22 @@ import cz.krejcar25.projectday.schedule.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
 import org.jetbrains.annotations.NotNull;
-import org.oxbow.swingbits.dialog.task.TaskDialogs;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Color;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
-public class RequestsExport {
-    private Project project;
-    private Workbook wb;
-    private boolean generated;
+public class RequestsExport extends ExcelExport {
 
     public RequestsExport(Project project) {
-        this.project = project;
-        wb = new XSSFWorkbook();
-        generated = false;
+        super(project);
     }
 
-    public void generate() throws IllegalStateException {
-        if (generated)
-            throw new IllegalStateException("This generator has already been used! Instances are single-use.");
-        generated = true;
+    @Override
+    protected void writeTable() {
         for (Group group : project.getGroups()) {
             Sheet sheet = wb.createSheet(group.getName());
             addStandHeaders(sheet);
             addNames(sheet, group);
             sheet.autoSizeColumn(0);
-        }
-    }
-
-    public void save(JFrame frame) throws IllegalStateException {
-        if (!generated)
-            throw new IllegalStateException("The workbook has not been generated. Run the generate method first.");
-        JFileChooser c = new JFileChooser();
-        String ext = "xlsx";
-        c.addChoosableFileFilter(new FileNameExtensionFilter(Strings.get("exports.excel.fileType.desc"), ext));
-        c.setAcceptAllFileFilterUsed(false);
-        int rVal = c.showSaveDialog(frame);
-
-        if (rVal == JFileChooser.APPROVE_OPTION) {
-            File file = c.getSelectedFile();
-            if (!file.getAbsoluteFile().toString().endsWith(ext)) file = new File(file.getAbsolutePath() + "." + ext);
-            try (FileOutputStream outputStream = new FileOutputStream(file)) {
-                wb.write(outputStream);
-            } catch (FileNotFoundException e) {
-                // We don't care
-            } catch (IOException e) {
-                TaskDialogs.showException(e);
-            }
         }
     }
 
@@ -73,14 +37,14 @@ public class RequestsExport {
 
         for (int i = 0; i < project.getStands().getSize(); i++) {
             Stand stand = project.getStands().getElementAt(i);
-            XSSFFont font = (XSSFFont) wb.createFont();
+            XSSFFont font = wb.createFont();
             font.setBold(true);
             font.setFontHeightInPoints((short) 14);
             Color fore = MainWindow.blackOrWhite(stand.getColor());
             byte[] fontColorBytes = new byte[]{(byte) fore.getRed(), (byte) fore.getGreen(), (byte) fore.getBlue()};
             font.setColor(new XSSFColor(fontColorBytes, new DefaultIndexedColorMap()));
 
-            XSSFCellStyle style = (XSSFCellStyle) wb.createCellStyle();
+            XSSFCellStyle style = wb.createCellStyle();
             style.setFont(font);
             style.setBorderTop(BorderStyle.DOUBLE);
             style.setBorderRight(i + 1 == project.getStands().getSize() ? BorderStyle.DOUBLE : BorderStyle.THIN);

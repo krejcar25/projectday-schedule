@@ -5,6 +5,7 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import cz.krejcar25.projectday.schedule.exports.AssignmentsExport;
+import cz.krejcar25.projectday.schedule.exports.ListsExport;
 import cz.krejcar25.projectday.schedule.exports.RequestsExport;
 import cz.krejcar25.projectday.schedule.imports.bakalari.Seznam;
 import cz.krejcar25.projectday.schedule.imports.bakalari.Student;
@@ -58,6 +59,8 @@ public class MainWindow extends JFrame implements ActionListener {
     private JButton assignmentsExportButton;
     private JList<Stand> assignmentsPersonRequestsList;
     private JLabel assignmentsPersonNameLabel;
+    private JButton listsExportButton;
+    private JButton presenceExportButton;
     private SpinnerNumberModel blockCountSpinnerModel;
 
     private JMenuItem editUndo;
@@ -360,6 +363,15 @@ public class MainWindow extends JFrame implements ActionListener {
         });
         assignmentsPersonRequestsList.setCellRenderer(new StandRenderer());
 
+        assignmentsExportButton.addActionListener(this);
+        assignmentsExportButton.setActionCommand("exports.assignments.assignments");
+
+        listsExportButton.addActionListener(this);
+        listsExportButton.setActionCommand("exports.assignments.lists");
+
+        presenceExportButton.addActionListener(this);
+        presenceExportButton.setActionCommand("exports.assignments.presence");
+
         actionPerformed(new ActionEvent(this, 0, "people.groupSelect"));
 
         sumsTable.setDefaultRenderer(Stand.class, new DefaultTableCellRenderer() {
@@ -389,9 +401,6 @@ public class MainWindow extends JFrame implements ActionListener {
         });
         sumsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         sumsTable.setGridColor(Color.BLACK);
-
-        assignmentsExportButton.addActionListener(this);
-        assignmentsExportButton.setActionCommand("exports.assignments.run");
 
         pack();
     }
@@ -576,10 +585,19 @@ public class MainWindow extends JFrame implements ActionListener {
                         break;
                     case "assignments":
                         switch (subcommands[2]) {
-                            case "run":
+                            case "assignments": {
                                 AssignmentsExport export = new AssignmentsExport(project);
                                 export.generate();
                                 export.save(this);
+                            }
+                            break;
+                            case "lists": {
+                                ListsExport export = new ListsExport(project);
+                                export.generate();
+                                export.save(this);
+                            }
+                            break;
+                            case "presence":
                                 break;
                         }
                         break;
@@ -771,8 +789,16 @@ public class MainWindow extends JFrame implements ActionListener {
         assignmentsGroupComboBox = new JComboBox();
         panel10.add(assignmentsGroupComboBox);
         assignmentsExportButton = new JButton();
-        this.$$$loadButtonText$$$(assignmentsExportButton, ResourceBundle.getBundle("strings").getString("assignments.export"));
+        this.$$$loadButtonText$$$(assignmentsExportButton, ResourceBundle.getBundle("strings").getString("assignments.export.assignments"));
         panel10.add(assignmentsExportButton);
+        listsExportButton = new JButton();
+        this.$$$loadButtonText$$$(listsExportButton, ResourceBundle.getBundle("strings").getString("assignments.export.singleList"));
+        listsExportButton.setToolTipText(ResourceBundle.getBundle("strings").getString("assignments.export.singleList.tooltip"));
+        panel10.add(listsExportButton);
+        presenceExportButton = new JButton();
+        this.$$$loadButtonText$$$(presenceExportButton, ResourceBundle.getBundle("strings").getString("assignments.export.presenceLists"));
+        presenceExportButton.setToolTipText(ResourceBundle.getBundle("strings").getString("assignments.export.presenceLists.tooltip"));
+        panel10.add(presenceExportButton);
         final JSplitPane splitPane1 = new JSplitPane();
         panel9.add(splitPane1, BorderLayout.CENTER);
         final JScrollPane scrollPane4 = new JScrollPane();

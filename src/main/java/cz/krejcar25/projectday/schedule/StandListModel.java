@@ -12,10 +12,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Vector;
 
 @XmlRootElement(name = "StandListModel")
-public class StandListModel implements ListModel<Stand>, Serializable {
+public class StandListModel implements ListModel<Stand>, Serializable, Iterable<Stand> {
     @XmlElementWrapper(name = "stands", required = true)
     @XmlElement(name = "stand", required = true)
     private Vector<Stand> stands;
@@ -96,5 +97,10 @@ public class StandListModel implements ListModel<Stand>, Serializable {
 
     void sort(@NotNull Person person) {
         stands.sort(Comparator.comparingInt(o -> person.getRequestForStand(o.getName())));
+    }
+
+    @Override
+    public Iterator<Stand> iterator() {
+        return stands.iterator();
     }
 }
