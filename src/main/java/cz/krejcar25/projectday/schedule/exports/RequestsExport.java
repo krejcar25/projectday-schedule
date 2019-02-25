@@ -41,16 +41,14 @@ public class RequestsExport extends ExcelExport {
             font.setBold(true);
             font.setFontHeightInPoints((short) 14);
             Color fore = MainWindow.blackOrWhite(stand.getColor());
-            byte[] fontColorBytes = new byte[]{(byte) fore.getRed(), (byte) fore.getGreen(), (byte) fore.getBlue()};
-            font.setColor(new XSSFColor(fontColorBytes, new DefaultIndexedColorMap()));
+            font.setColor(new XSSFColor(fore));
 
             XSSFCellStyle style = wb.createCellStyle();
             style.setFont(font);
             style.setBorderTop(BorderStyle.DOUBLE);
             style.setBorderRight(i + 1 == project.getStands().getSize() ? BorderStyle.DOUBLE : BorderStyle.THIN);
             style.setBorderBottom(BorderStyle.MEDIUM);
-            byte[] colorBytes = new byte[]{(byte) stand.getColor().getRed(), (byte) stand.getColor().getGreen(), (byte) stand.getColor().getBlue()};
-            style.setFillForegroundColor(new XSSFColor(colorBytes, new DefaultIndexedColorMap()));
+            style.setFillForegroundColor(new XSSFColor(stand.getColor()));
             style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 
             Cell cell = header.createCell(i + 1);

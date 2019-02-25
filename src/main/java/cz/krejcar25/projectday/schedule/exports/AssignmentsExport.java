@@ -43,7 +43,7 @@ public class AssignmentsExport extends ExcelExport {
             XSSFCellStyle style = wb.createCellStyle();
             style.setFont(font);
             style.setBorderTop(BorderStyle.DOUBLE);
-            style.setBorderRight(i + 1 == project.getStands().getSize() ? BorderStyle.DOUBLE : BorderStyle.THIN);
+            style.setBorderRight(i + 1 == project.getBlockCount() ? BorderStyle.DOUBLE : BorderStyle.THIN);
             style.setBorderBottom(BorderStyle.MEDIUM);
 
             Cell cell = header.createCell(i + 1);
@@ -73,7 +73,7 @@ public class AssignmentsExport extends ExcelExport {
                 Cell cell = row.createCell(j);
 
                 XSSFCellStyle style = wb.createCellStyle();
-                style.setBorderRight(j == project.getStands().getSize() ? BorderStyle.DOUBLE : BorderStyle.DASHED);
+                style.setBorderRight(j == project.getBlockCount() ? BorderStyle.DOUBLE : BorderStyle.DASHED);
                 style.setBorderBottom(i + 1 == group.getPeople().size() ? BorderStyle.DOUBLE : BorderStyle.THIN);
                 if (stand != null) {
                     XSSFFont font = wb.createFont();
@@ -81,8 +81,7 @@ public class AssignmentsExport extends ExcelExport {
                     font.setFontHeightInPoints((short) 14);
                     Color fore = MainWindow.blackOrWhite(stand.getColor());
                     font.setColor(new XSSFColor(fore));
-                    byte[] colorBytes = new byte[]{(byte) stand.getColor().getRed(), (byte) stand.getColor().getGreen(), (byte) stand.getColor().getBlue()};
-                    style.setFillForegroundColor(new XSSFColor(colorBytes, new DefaultIndexedColorMap()));
+                    style.setFillForegroundColor(new XSSFColor(stand.getColor()));
                     style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
                     style.setFont(font);
                     cell.setCellValue(stand.getName());

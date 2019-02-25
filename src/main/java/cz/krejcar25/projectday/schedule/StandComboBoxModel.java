@@ -44,7 +44,7 @@ public class StandComboBoxModel implements ComboBoxModel<Stand> {
     private void refillStands(StandListModel model) {
         stands.removeAllElements();
         if (empty) stands.add(Stand.EMPTY);
-        for (int i = 0; i < model.getSize(); i++) stands.add(model.getElementAt(i));
+        for (Stand stand : model) stands.add(stand);
     }
 
     @Override

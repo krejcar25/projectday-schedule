@@ -5,8 +5,9 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import cz.krejcar25.projectday.schedule.exports.AssignmentsExport;
-import cz.krejcar25.projectday.schedule.exports.ListsExport;
+import cz.krejcar25.projectday.schedule.exports.PresenceExport;
 import cz.krejcar25.projectday.schedule.exports.RequestsExport;
+import cz.krejcar25.projectday.schedule.exports.SingleListExport;
 import cz.krejcar25.projectday.schedule.imports.bakalari.Seznam;
 import cz.krejcar25.projectday.schedule.imports.bakalari.Student;
 import org.jetbrains.annotations.NotNull;
@@ -592,12 +593,15 @@ public class MainWindow extends JFrame implements ActionListener {
                             }
                             break;
                             case "lists": {
-                                ListsExport export = new ListsExport(project);
+                                SingleListExport export = new SingleListExport(project);
                                 export.generate();
                                 export.save(this);
                             }
                             break;
                             case "presence":
+                                PresenceExport export = new PresenceExport(project);
+                                export.generate();
+                                export.save(this);
                                 break;
                         }
                         break;
