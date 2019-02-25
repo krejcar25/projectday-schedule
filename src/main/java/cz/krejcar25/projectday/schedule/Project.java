@@ -15,7 +15,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.*;
+import java.util.Enumeration;
 import java.util.Vector;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 @XmlRootElement(name = "project")
 public class Project {
@@ -45,18 +50,40 @@ public class Project {
         File file = openFileChooser(window);
         if (file == null) return returnNewOnCancel ? new Project(window) : null;
         try {
-            FileInputStream xml = new FileInputStream(file);
-            InputStream xsd = Project.class.getResourceAsStream("project.xsd");
-            if (XmlValidation.validateAgainstXSD(xml, xsd)) {
-                JAXBContext context = JAXBContext.newInstance(Project.class, Group.class, Person.class, StandListModel.class, Stand.class);
-                Unmarshaller unmarshaller = context.createUnmarshaller();
-                Project project = (Project) unmarshaller.unmarshal(file);
+            Project project = loadFromXml(new FileInputStream(file), Project.class.getResourceAsStream("project.xsd"));
+            if (project == null) {
+                ZipFile zip = new ZipFile(file);
+                Enumeration<? extends ZipEntry> entries = zip.entries();
+                while (entries.hasMoreElements()) {
+                    ZipEntry entry = entries.nextElement();
+                    if ("project.xml".equals(entry.getName())) {
+                        project = loadFromXml(zip.getInputStream(entry), Project.class.getResourceAsStream("project.xsd"));
+                        return project;
+                    }
+                }
+            } else {
                 project.lastSaveLocation = file;
-                for (Group group : project.groups) group.setProject(project);
                 return project;
             }
         } catch (Exception e) {
             TaskDialogs.showException(e);
+        }
+        return null;
+    }
+
+    @Nullable
+    private static Project loadFromXml(InputStream xml, InputStream xsd) {
+        try {
+            byte[] xmlB = xml.readAllBytes();
+            if (XmlValidation.validateAgainstXSD(new ByteArrayInputStream(xmlB), xsd)) {
+                JAXBContext context = JAXBContext.newInstance(Project.class, Group.class, Person.class, StandListModel.class, Stand.class);
+                Unmarshaller unmarshaller = context.createUnmarshaller();
+                Project project = (Project) unmarshaller.unmarshal(new ByteArrayInputStream(xmlB));
+                for (Group group : project.groups) group.setProject(project);
+                return project;
+            }
+        } catch (Exception ex) {
+            TaskDialogs.showException(ex);
         }
         return null;
     }
@@ -179,13 +206,16 @@ public class Project {
     }
 
     private void saveAs(File file) {
-        try {
+        try (ZipOutputStream zip = new ZipOutputStream(new FileOutputStream(file))) {
             JAXBContext context = JAXBContext.newInstance(Project.class, Group.class, Person.class, StandListModel.class, Stand.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.marshal(this, file);
+            ZipEntry project_xml = new ZipEntry("project.xml");
+            zip.putNextEntry(project_xml);
+            marshaller.marshal(this, zip);
+            zip.closeEntry();
             lastSaveLocation = file;
-        } catch (JAXBException e) {
+        } catch (Exception e) {
             TaskDialogs.showException(e);
         }
     }

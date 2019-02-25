@@ -11,7 +11,7 @@ public class Seznam {
         return student;
     }
 
-    @XmlElement(name = "Student")
+    @XmlElement(name = "student")
     public void setStudent(Student[] student) {
         this.student = student;
     }
@@ -21,4 +21,3 @@ public class Seznam {
         return String.format("Seznam %d studentu", student.length);
     }
 }
-
