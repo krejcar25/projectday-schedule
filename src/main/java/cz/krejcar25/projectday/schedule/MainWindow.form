@@ -336,7 +336,9 @@
                   <component id="7ecbb" class="javax.swing.JButton" binding="requestsImportButton">
                     <constraints/>
                     <properties>
+                      <hideActionText value="false"/>
                       <text resource-bundle="strings" key="requests.importRequests"/>
+                      <visible value="false"/>
                     </properties>
                   </component>
                   <component id="34ca2" class="javax.swing.JButton" binding="exportRequestChartsButton">

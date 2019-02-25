@@ -773,7 +773,9 @@ public class MainWindow extends JFrame implements ActionListener {
         requestsGroupComboBox = new JComboBox();
         panel8.add(requestsGroupComboBox);
         requestsImportButton = new JButton();
+        requestsImportButton.setHideActionText(false);
         this.$$$loadButtonText$$$(requestsImportButton, ResourceBundle.getBundle("strings").getString("requests.importRequests"));
+        requestsImportButton.setVisible(false);
         panel8.add(requestsImportButton);
         exportRequestChartsButton = new JButton();
         this.$$$loadButtonText$$$(exportRequestChartsButton, ResourceBundle.getBundle("strings").getString("requests.createRequestExcel"));
