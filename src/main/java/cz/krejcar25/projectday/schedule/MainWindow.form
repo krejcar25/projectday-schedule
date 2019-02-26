@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="cz.krejcar25.projectday.schedule.MainWindow">
   <grid id="27dc6" binding="root" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="536" height="400"/>
+      <xy x="20" y="20" width="536" height="618"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -58,6 +58,18 @@
                 <rowspec value="center:d:noGrow"/>
                 <rowspec value="top:3dlu:noGrow"/>
                 <rowspec value="center:max(d;4px):noGrow"/>
+                <rowspec value="top:3dlu:noGrow"/>
+                <rowspec value="center:max(d;4px):noGrow"/>
+                <rowspec value="top:3dlu:noGrow"/>
+                <rowspec value="center:max(d;4px):noGrow"/>
+                <rowspec value="top:3dlu:noGrow"/>
+                <rowspec value="center:max(d;4px):noGrow"/>
+                <rowspec value="top:3dlu:noGrow"/>
+                <rowspec value="center:max(d;4px):noGrow"/>
+                <rowspec value="top:3dlu:noGrow"/>
+                <rowspec value="center:max(d;4px):noGrow"/>
+                <rowspec value="top:3dlu:noGrow"/>
+                <rowspec value="center:max(d;4px):noGrow"/>
                 <colspec value="fill:d:grow"/>
                 <colspec value="left:4dlu:noGrow"/>
                 <colspec value="fill:d:grow"/>
@@ -85,6 +97,68 @@
                     <properties>
                       <text resource-bundle="strings" key="people.remove"/>
                       <toolTipText resource-bundle="strings" key="people.remove.tooltip"/>
+                    </properties>
+                  </component>
+                  <component id="5d688" class="javax.swing.JSeparator">
+                    <constraints>
+                      <grid row="4" column="0" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <forms defaultalign-horz="false" defaultalign-vert="false"/>
+                    </constraints>
+                    <properties/>
+                  </component>
+                  <component id="1fcf7" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="6" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <forms/>
+                    </constraints>
+                    <properties>
+                      <font style="1"/>
+                      <text resource-bundle="strings" key="people.create.header"/>
+                    </properties>
+                  </component>
+                  <component id="e4e27" class="javax.swing.JTextField" binding="newPersonNameTextField">
+                    <constraints>
+                      <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="-1"/>
+                      </grid>
+                      <forms defaultalign-horz="false"/>
+                    </constraints>
+                    <properties/>
+                  </component>
+                  <component id="eb920" class="javax.swing.JComboBox" binding="newPersonGroupComboBox">
+                    <constraints>
+                      <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                      <forms/>
+                    </constraints>
+                    <properties>
+                      <editable value="true"/>
+                    </properties>
+                  </component>
+                  <component id="8e2df" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <forms/>
+                    </constraints>
+                    <properties>
+                      <text resource-bundle="strings" key="people.create.name"/>
+                    </properties>
+                  </component>
+                  <component id="8dd65" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <forms/>
+                    </constraints>
+                    <properties>
+                      <text resource-bundle="strings" key="people.create.group"/>
+                    </properties>
+                  </component>
+                  <component id="1dee5" class="javax.swing.JButton" binding="addPersonButton">
+                    <constraints>
+                      <grid row="12" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <forms/>
+                    </constraints>
+                    <properties>
+                      <text resource-bundle="strings" key="people.create.add"/>
                     </properties>
                   </component>
                 </children>
@@ -131,7 +205,9 @@
                 <rowspec value="top:3dlu:noGrow"/>
                 <rowspec value="center:max(d;4px):noGrow"/>
                 <rowspec value="top:3dlu:noGrow"/>
-                <rowspec value="center:max(d;4px):noGrow"/>
+                <rowspec value="center:32px:noGrow"/>
+                <rowspec value="top:3dlu:noGrow"/>
+                <rowspec value="center:d:noGrow"/>
                 <rowspec value="top:3dlu:noGrow"/>
                 <rowspec value="center:max(d;4px):noGrow"/>
                 <rowspec value="top:3dlu:noGrow"/>
@@ -142,7 +218,11 @@
                 <rowspec value="center:max(d;4px):noGrow"/>
                 <rowspec value="top:3dlu:noGrow"/>
                 <rowspec value="center:31px:noGrow"/>
-                <rowspec value="top:3dlu:grow"/>
+                <rowspec value="top:77dlu:grow"/>
+                <rowspec value="top:3dlu:noGrow"/>
+                <rowspec value="top:3dlu:noGrow"/>
+                <rowspec value="center:d:noGrow"/>
+                <rowspec value="center:max(d;4px):noGrow"/>
                 <rowspec value="center:max(d;4px):noGrow"/>
                 <colspec value="fill:d:noGrow"/>
                 <colspec value="left:4dlu:noGrow"/>
@@ -185,7 +265,7 @@
                   </component>
                   <component id="d40e8" class="javax.swing.JLabel">
                     <constraints>
-                      <grid row="8" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="10" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                       <forms/>
                     </constraints>
                     <properties>
@@ -195,7 +275,7 @@
                   </component>
                   <component id="86fb2" class="javax.swing.JLabel">
                     <constraints>
-                      <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                       <forms/>
                     </constraints>
                     <properties>
@@ -204,7 +284,7 @@
                   </component>
                   <component id="19d7e" class="javax.swing.JTextField" binding="editStandNameTextField">
                     <constraints>
-                      <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                      <grid row="12" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
                       </grid>
                       <forms defaultalign-horz="false"/>
@@ -215,7 +295,7 @@
                   </component>
                   <component id="1e64c" class="javax.swing.JButton" binding="removeStandButton" default-binding="true">
                     <constraints>
-                      <grid row="16" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="18" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                       <forms/>
                     </constraints>
                     <properties>
@@ -242,7 +322,7 @@
                   </component>
                   <component id="b4d39" class="javax.swing.JButton" binding="chooseEditColorButton" default-binding="true">
                     <constraints>
-                      <grid row="14" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="16" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                       <forms/>
                     </constraints>
                     <properties>
@@ -251,7 +331,7 @@
                   </component>
                   <component id="cbb4c" class="javax.swing.JButton" binding="saveStandButton">
                     <constraints>
-                      <grid row="14" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="16" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                       <forms/>
                     </constraints>
                     <properties>
@@ -260,7 +340,7 @@
                   </component>
                   <component id="33b06" class="javax.swing.JLabel">
                     <constraints>
-                      <grid row="18" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="24" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                       <forms/>
                     </constraints>
                     <properties>
@@ -270,7 +350,7 @@
                   </component>
                   <component id="7e4ec" class="javax.swing.JSpinner" binding="blockCountSpinner">
                     <constraints>
-                      <grid row="18" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="24" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                       <forms defaultalign-horz="false"/>
                     </constraints>
                     <properties>
@@ -297,7 +377,7 @@
                   </component>
                   <component id="ece7d" class="javax.swing.JLabel">
                     <constraints>
-                      <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="14" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                       <forms/>
                     </constraints>
                     <properties>
@@ -306,12 +386,26 @@
                   </component>
                   <component id="2781a" class="javax.swing.JSpinner" binding="editStandLimitSpinner">
                     <constraints>
-                      <grid row="12" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="14" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                       <forms defaultalign-horz="false"/>
                     </constraints>
                     <properties>
                       <toolTipText resource-bundle="strings" key="stands.limit.tooltip"/>
                     </properties>
+                  </component>
+                  <component id="61c82" class="javax.swing.JSeparator">
+                    <constraints>
+                      <grid row="8" column="0" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <forms defaultalign-horz="false" defaultalign-vert="false"/>
+                    </constraints>
+                    <properties/>
+                  </component>
+                  <component id="ad0a1" class="javax.swing.JSeparator">
+                    <constraints>
+                      <grid row="22" column="0" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <forms defaultalign-horz="false" defaultalign-vert="false"/>
+                    </constraints>
+                    <properties/>
                   </component>
                 </children>
               </grid>
@@ -403,44 +497,84 @@
                   </component>
                 </children>
               </grid>
-              <splitpane id="96625">
+              <grid id="fd493" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints border-constraint="Center"/>
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <scrollpane id="41806">
+                  <scrollpane id="fe11a">
                     <constraints>
-                      <splitpane position="left"/>
+                      <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="da42e" class="javax.swing.JTable" binding="assignmentsTable">
+                      <component id="f4dc1" class="javax.swing.JTable" binding="assignmentsTable">
                         <constraints/>
                         <properties/>
                       </component>
                     </children>
                   </scrollpane>
-                  <grid id="f0a70" layout-manager="BorderLayout" hgap="0" vgap="0">
+                  <grid id="bbfed" layout-manager="BorderLayout" hgap="0" vgap="0">
                     <constraints>
-                      <splitpane position="right"/>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="16306" class="javax.swing.JLabel" binding="assignmentsPersonNameLabel">
+                      <component id="8bf57" class="javax.swing.JLabel" binding="assignmentsPersonNameLabel">
                         <constraints border-constraint="North"/>
                         <properties>
                           <font style="1"/>
                           <text value=""/>
                         </properties>
                       </component>
-                      <scrollpane id="c7385">
+                      <scrollpane id="9439e">
                         <constraints border-constraint="Center"/>
                         <properties/>
                         <border type="none"/>
                         <children>
-                          <component id="d95fa" class="javax.swing.JList" binding="assignmentsPersonRequestsList">
+                          <component id="743e" class="javax.swing.JList" binding="assignmentsPersonRequestsList">
+                            <constraints/>
+                            <properties/>
+                          </component>
+                        </children>
+                      </scrollpane>
+                    </children>
+                  </grid>
+                  <grid id="fcb7" layout-manager="BorderLayout" hgap="0" vgap="0">
+                    <constraints>
+                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <grid id="b836" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                        <constraints border-constraint="South"/>
+                        <properties/>
+                        <border type="none"/>
+                        <children>
+                          <component id="9572" class="javax.swing.JLabel">
+                            <constraints/>
+                            <properties>
+                              <text resource-bundle="strings" key="sums.status"/>
+                            </properties>
+                          </component>
+                          <component id="88b0" class="javax.swing.JLabel" binding="sumsStatusLabel">
+                            <constraints/>
+                            <properties>
+                              <text value=""/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                      <scrollpane id="28dbf">
+                        <constraints border-constraint="Center"/>
+                        <properties/>
+                        <border type="none"/>
+                        <children>
+                          <component id="4cbec" class="javax.swing.JTable" binding="sumsTable">
                             <constraints/>
                             <properties/>
                           </component>
@@ -449,46 +583,7 @@
                     </children>
                   </grid>
                 </children>
-              </splitpane>
-            </children>
-          </grid>
-          <grid id="29546" layout-manager="BorderLayout" hgap="0" vgap="0">
-            <constraints>
-              <tabbedpane title-resource-bundle="strings" title-key="sums.label"/>
-            </constraints>
-            <properties/>
-            <border type="none"/>
-            <children>
-              <grid id="48245" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
-                <constraints border-constraint="South"/>
-                <properties/>
-                <border type="none"/>
-                <children>
-                  <component id="b661a" class="javax.swing.JLabel">
-                    <constraints/>
-                    <properties>
-                      <text resource-bundle="strings" key="sums.status"/>
-                    </properties>
-                  </component>
-                  <component id="3a3e6" class="javax.swing.JLabel" binding="sumsStatusLabel">
-                    <constraints/>
-                    <properties>
-                      <text value=""/>
-                    </properties>
-                  </component>
-                </children>
               </grid>
-              <scrollpane id="479b">
-                <constraints border-constraint="Center"/>
-                <properties/>
-                <border type="none"/>
-                <children>
-                  <component id="7b44" class="javax.swing.JTable" binding="sumsTable">
-                    <constraints/>
-                    <properties/>
-                  </component>
-                </children>
-              </scrollpane>
             </children>
           </grid>
         </children>

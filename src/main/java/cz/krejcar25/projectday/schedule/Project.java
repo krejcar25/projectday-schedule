@@ -6,8 +6,8 @@ import org.oxbow.swingbits.dialog.task.TaskDialogs;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.undo.UndoManager;
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -15,17 +15,18 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.*;
+import java.security.MessageDigest;
 import java.util.Enumeration;
 import java.util.Vector;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 @XmlRootElement(name = "project")
 public class Project
 {
 	private static final String FILE_TYPE = "pdproj";
+	private final transient UndoManager undoManager;
 	private transient File lastSaveLocation;
 	private transient MainWindow window;
 	@XmlElementWrapper(name = "groups", required = true)
@@ -37,11 +38,14 @@ public class Project
 
 	public Project()
 	{
-
+		this.undoManager = new UndoManager();
+		this.undoManager.setLimit(100);
 	}
 
 	public Project(MainWindow window)
 	{
+		this.undoManager = new UndoManager();
+		this.undoManager.setLimit(100);
 		this.window = window;
 		this.groups = new Vector<>();
 		this.stands = new StandListModel();
@@ -69,12 +73,14 @@ public class Project
 						return project;
 					}
 				}
-			} else
+			}
+			else
 			{
 				project.lastSaveLocation = file;
 				return project;
 			}
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 			TaskDialogs.showException(e);
 		}
@@ -95,7 +101,8 @@ public class Project
 				for (Group group : project.groups) group.setProject(project);
 				return project;
 			}
-		} catch (Exception ex)
+		}
+		catch (Exception ex)
 		{
 			TaskDialogs.showException(ex);
 		}
@@ -113,7 +120,8 @@ public class Project
 			File file = c.getSelectedFile();
 			if (!file.getName().endsWith(FILE_TYPE)) return new File(file.getAbsolutePath() + "." + FILE_TYPE);
 			else return file;
-		} else return null;
+		}
+		else return null;
 	}
 
 	@Nullable
@@ -164,7 +172,8 @@ public class Project
 		if (groupExists(group.getName()))
 		{
 			for (Person person : group.getPeople()) addPerson(person.getName(), person.getGroup().getName());
-		} else groups.addElement(group);
+		}
+		else groups.addElement(group);
 	}
 
 	@Nullable
@@ -175,7 +184,8 @@ public class Project
 			Group group = getGroup(groupName);
 			if (group == null) return null;
 			else return group.getPeople();
-		} else return null;
+		}
+		else return null;
 	}
 
 	private void addPerson(@NotNull Person newPerson)
@@ -184,7 +194,8 @@ public class Project
 		{
 			Group group = getGroup(newPerson.getGroup().getName());
 			if (group != null) group.addPerson(newPerson);
-		} else groups.addElement(newPerson.getGroup());
+		}
+		else groups.addElement(newPerson.getGroup());
 	}
 
 	void addPerson(String name, String group)
@@ -192,7 +203,8 @@ public class Project
 		if (groupExists(group))
 		{
 			addPerson(new Person(name, getGroup(group)));
-		} else
+		}
+		else
 		{
 			addGroup(new Group(group, this));
 			addPerson(name, group);
@@ -253,11 +265,21 @@ public class Project
 			Marshaller marshaller = context.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			ZipEntry project_xml = new ZipEntry("project.xml");
+			ByteArrayOutputStream xmlByteStream = new ByteArrayOutputStream();
+			marshaller.marshal(this, xmlByteStream);
+			byte[] xmlBytes = xmlByteStream.toByteArray();
 			zip.putNextEntry(project_xml);
-			marshaller.marshal(this, zip);
+			new ByteArrayInputStream(xmlBytes).transferTo(zip);
 			zip.closeEntry();
+			MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
+			byte[] checksum = sha256.digest(xmlBytes);
+			zip.putNextEntry(new ZipEntry("checksum.sha256"));
+			new ByteArrayInputStream(checksum).transferTo(zip);
+			zip.closeEntry();
+
 			lastSaveLocation = file;
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 			TaskDialogs.showException(e);
 		}
@@ -266,5 +288,11 @@ public class Project
 	void setWindow(MainWindow window)
 	{
 		this.window = window;
+	}
+
+	void removeGroup(String name)
+	{
+		Group group = getGroup(name);
+		if (group != null && group.getPeople().size() == 0) groups.remove(group);
 	}
 }
