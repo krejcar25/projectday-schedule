@@ -10,10 +10,10 @@ public class Person implements Serializable
 	@XmlAttribute(name = "name")
 	private String name;
 	private Group group;
-	@XmlElementWrapper(name = "requests")
+	@XmlElementWrapper(name = "requests", required = true)
 	@XmlElement(name = "pair")
 	private Vector<StandValue> requests;
-	@XmlElementWrapper(name = "assignments")
+	@XmlElementWrapper(name = "assignments", required = true)
 	@XmlElement(name = "pair")
 	private Vector<StandValue> assignments;
 

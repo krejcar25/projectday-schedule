@@ -12,14 +12,14 @@
     <xs:element name="requests">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="pair" maxOccurs="unbounded"/>
+                <xs:element ref="pair" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
     <xs:element name="assignments">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="pair" maxOccurs="unbounded"/>
+                <xs:element ref="pair" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -70,14 +70,14 @@
     <xs:element name="stands">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="stand" maxOccurs="unbounded"/>
+                <xs:element ref="stand" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
     <xs:element name="groups">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="group" maxOccurs="unbounded"/>
+                <xs:element ref="group" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

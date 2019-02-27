@@ -19,7 +19,7 @@ import java.util.Vector;
 public class StandListModel implements ListModel<Stand>, Serializable, Iterable<Stand>
 {
 	@XmlElementWrapper(name = "stands", required = true)
-	@XmlElement(name = "stand", required = true)
+	@XmlElement(name = "stand")
 	private Vector<Stand> stands;
 	@XmlTransient
 	private Vector<ListDataListener> listDataListeners;

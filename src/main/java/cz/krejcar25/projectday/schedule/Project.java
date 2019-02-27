@@ -30,7 +30,7 @@ public class Project
 	private transient File lastSaveLocation;
 	private transient MainWindow window;
 	@XmlElementWrapper(name = "groups", required = true)
-	@XmlElement(name = "group", required = true)
+	@XmlElement(name = "group")
 	private Vector<Group> groups;
 	@XmlElement(name = "StandListModel", required = true)
 	private StandListModel stands;
