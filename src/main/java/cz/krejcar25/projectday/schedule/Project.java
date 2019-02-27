@@ -16,6 +16,8 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.*;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Vector;
 import java.util.zip.ZipEntry;
@@ -26,6 +28,22 @@ import java.util.zip.ZipOutputStream;
 public class Project
 {
 	private static final String FILE_TYPE = "pdproj";
+	private static final MessageDigest SHA256;
+
+	static
+	{
+		MessageDigest sha256 = null;
+		try
+		{
+			sha256 = MessageDigest.getInstance("SHA-256");
+		}
+		catch (NoSuchAlgorithmException e)
+		{
+			// Won't occur
+		}
+		SHA256 = sha256;
+	}
+
 	private final transient UndoManager undoManager;
 	private transient File lastSaveLocation;
 	private transient MainWindow window;
@@ -64,14 +82,25 @@ public class Project
 			{
 				ZipFile zip = new ZipFile(file);
 				Enumeration<? extends ZipEntry> entries = zip.entries();
+				byte[] checksum = null;
+				byte[] xml = null;
 				while (entries.hasMoreElements())
 				{
 					ZipEntry entry = entries.nextElement();
-					if ("project.xml".equals(entry.getName()))
+					if ("checksum.sha256".equals(entry.getName()))
 					{
-						project = loadFromXml(zip.getInputStream(entry), Project.class.getResourceAsStream("project.xsd"));
-						return project;
+						checksum = zip.getInputStream(entry).readAllBytes();
 					}
+					else if ("project.xml".equals(entry.getName()))
+					{
+						xml = zip.getInputStream(entry).readAllBytes();
+					}
+				}
+				if (checksum != null && xml != null)
+				{
+					if (Arrays.equals(checksum, SHA256.digest(xml)))
+						project = loadFromXml(new ByteArrayInputStream(xml), Project.class.getResourceAsStream("project.xsd"));
+					return project;
 				}
 			}
 			else
@@ -271,8 +300,7 @@ public class Project
 			zip.putNextEntry(project_xml);
 			new ByteArrayInputStream(xmlBytes).transferTo(zip);
 			zip.closeEntry();
-			MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
-			byte[] checksum = sha256.digest(xmlBytes);
+			byte[] checksum = SHA256.digest(xmlBytes);
 			zip.putNextEntry(new ZipEntry("checksum.sha256"));
 			new ByteArrayInputStream(checksum).transferTo(zip);
 			zip.closeEntry();
